@@ -23,6 +23,7 @@ const success = async (pos) => {
       <p id="city">${data2.location.name}</p>
       <p id="country">${data2.location.country}</p>
       <p id="date">${newDate}</p>
+      <img src="${data2.current.condition.icon}" alt="logo de la condition">
       <p id="condition">${data2.current.condition.text}</p>
       <p id="temp">${data2.current.temp_c}°</p>  
       <div class="info">
