@@ -2,7 +2,6 @@ const success = async (pos) => {
   let data2 = "";
   latitude = pos.coords.latitude;
   longitude = pos.coords.longitude;
-  // console.log(latitude, longitude);
   await fetch(
     `https://api.weatherapi.com/v1/current.json?key=92be7c89067c4927ae2151448231110&q=${latitude},${longitude}`,
     { method: "get" }
@@ -12,11 +11,18 @@ const success = async (pos) => {
       data2 = JSON.parse(data);
     });
 
+  let newDate = new Date().toLocaleDateString("fr-FR", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
+
   document.body.innerHTML = `
     <div class="card">
     <div class="card-container">
       <p id="city">${data2.location.name}</p>
       <p id="country">${data2.location.country}</p>
+      <p id="date">${newDate}</p>
       <p id="condition">${data2.current.condition.text}</p>
       <p id="temp">${data2.current.temp_c}°</p>  
       <div class="info">
