@@ -9,7 +9,6 @@ const success = async (pos) => {
     .then((res) => res.text())
     .then((data) => {
       data2 = JSON.parse(data);
-      console.log(data2);
     });
 
   let newDate = new Date().toLocaleDateString("fr-FR", {
