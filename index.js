@@ -1,14 +1,15 @@
+let data2 = "";
 const success = async (pos) => {
-  let data2 = "";
   latitude = pos.coords.latitude;
   longitude = pos.coords.longitude;
   await fetch(
-    `https://api.weatherapi.com/v1/current.json?key=92be7c89067c4927ae2151448231110&q=${latitude},${longitude}`,
+    `https://api.weatherapi.com/v1/forecast.json?key=92be7c89067c4927ae2151448231110&q=${latitude},${longitude}&days=7`,
     { method: "get" }
   )
     .then((res) => res.text())
     .then((data) => {
       data2 = JSON.parse(data);
+      console.log(data2);
     });
 
   let newDate = new Date().toLocaleDateString("fr-FR", {
@@ -16,6 +17,15 @@ const success = async (pos) => {
     month: "long",
     day: "numeric",
   });
+
+  const dateFormat = (date) => {
+    const newDate = new Date(date);
+
+    const options = { year: "numeric", month: "short", day: "2-digit" };
+    const formattedDate = newDate.toLocaleDateString("fr-FR", options);
+
+    return formattedDate;
+  };
 
   document.body.innerHTML = `
     <div class="card">
@@ -25,7 +35,7 @@ const success = async (pos) => {
       <p id="date">${newDate}</p>
       <img src="${data2.current.condition.icon}" alt="logo de la condition">
       <p id="condition">${data2.current.condition.text}</p>
-      <p id="temp">${data2.current.temp_c}°</p>  
+      <p id="temp">${data2.current.temp_c}°</p>
       <div class="info">
         <div class="precipitation">
           <i class="fa-solid fa-cloud-rain"></i>
@@ -41,6 +51,35 @@ const success = async (pos) => {
           <i class="fa-solid fa-wind"></i>
           <p class="key">Wind speed</p>
           <p class="value">${data2.current.wind_kph} km/h</p>
+        </div>
+      </div>
+      <div class="forecast">
+        <div class="dayOne">
+        <img src="${
+          data2.forecast.forecastday[1].day.condition.icon
+        }" alt="logo de la condition" height="50px">
+          <p class="key">${dateFormat(data2.forecast.forecastday[1].date)}</p>
+          <p class="value">${data2.forecast.forecastday[1].day.mintemp_c}°/${
+    data2.forecast.forecastday[1].day.maxtemp_c
+  }°</p>
+        </div>
+        <div class="dayTwo">
+        <img src="${
+          data2.forecast.forecastday[2].day.condition.icon
+        }" alt="logo de la condition" height="50px">
+        <p class="key">${dateFormat(data2.forecast.forecastday[2].date)}</p>
+        <p class="value">${data2.forecast.forecastday[2].day.mintemp_c}°/${
+    data2.forecast.forecastday[2].day.maxtemp_c
+  }°</p>
+        </div>
+        <div class="dayThree">
+        <img src="${
+          data2.forecast.forecastday[3].day.condition.icon
+        }" alt="logo de la condition" height="50px">
+        <p class="key">${dateFormat(data2.forecast.forecastday[3].date)}</p>
+          <p class="value">${data2.forecast.forecastday[3].day.mintemp_c}°/${
+    data2.forecast.forecastday[3].day.maxtemp_c
+  }°</p>
         </div>
       </div>
     </div>
