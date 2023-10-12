@@ -46,7 +46,7 @@ body {
   margin-left: 20px;
   font-size: 64px;
   font-weight: 400;
-  margin-top: -20px;
+  margin-top: -10px;
 }
 .info {
   margin-top: 20px;
@@ -59,4 +59,13 @@ body {
 }
 .key {
   font-size: 12px;
+}
+.forecast {
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-between;
+  text-align: center;
+  background-color: rgba(255, 255, 255, 0.262);
+  padding: 5px;
+  border-radius: 20px;
 }
