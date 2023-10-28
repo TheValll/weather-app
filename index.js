@@ -70,16 +70,6 @@ const success = async (pos) => {
         <p class="value">${data2.forecast.forecastday[2].day.mintemp_c}°/${
     data2.forecast.forecastday[2].day.maxtemp_c
   }°</p>
-        </div>
-        <div class="dayThree">
-        <img src="${
-          data2.forecast.forecastday[3].day.condition.icon
-        }" alt="logo de la condition" height="50px">
-        <p class="key">${dateFormat(data2.forecast.forecastday[3].date)}</p>
-          <p class="value">${data2.forecast.forecastday[3].day.mintemp_c}°/${
-    data2.forecast.forecastday[3].day.maxtemp_c
-  }°</p>
-        </div>
       </div>
     </div>
   </div>
